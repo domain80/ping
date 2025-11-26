@@ -9,18 +9,19 @@ Ping is a project management tool that combines the collaborative communication 
     -   Workspace and team management
     -   Real-time chat and threads
     -   Basic task creation, assignment, and playback
-    -   Kanban-style board view
+    -   Kanban-style board and list view
 -   **v0.2**
+    -   Teams
     -   Integrations with GitHub, Google Calendar
     -   Notification improvements (email & in-app)
     -   Advanced task filters & search
     -   File attachments and previews
     -   Mobile web support
--   **v1.0**
+-   **v3.0**
+    -   Time tracking
     -   Third-party plugin system
     -   Custom workflow automations
     -   Detailed analytics & reporting
-    -   Time tracking
     -   Desktop & native mobile apps
 
 _This roadmap is subject to change based on user feedback and team priorities._
