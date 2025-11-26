@@ -4,25 +4,25 @@ Ping is a project management tool that combines the collaborative communication 
 
 ## 🛣️ Roadmap
 
--   **v0.1 - MVP**
-    -   User signup/sign-in (Google sign in only)
-    -   Workspace and team management
-    -   Real-time chat and threads
-    -   Basic task creation, assignment, and playback
-    -   Kanban-style board and list view
--   **v0.2**
-    -   Teams
-    -   Integrations with GitHub, Google Calendar
-    -   Notification improvements (email & in-app)
-    -   Advanced task filters & search
-    -   File attachments and previews
-    -   Mobile web support
--   **v3.0**
-    -   Time tracking
-    -   Third-party plugin system
-    -   Custom workflow automations
-    -   Detailed analytics & reporting
-    -   Desktop & native mobile apps
+- **v0.1 - MVP**
+    - User signup/sign-in (Google sign in only)
+    - Workspace and team management
+    - Real-time chat and threads
+    - Basic task creation, assignment, and playback
+    - Kanban-style board and list view
+- **v0.2**
+    - Teams
+    - Integrations with GitHub, Google Calendar
+    - Notification improvements (email & in-app)
+    - Advanced task filters & search
+    - File attachments and previews
+    - Mobile web support
+- **v3.0**
+    - Time tracking
+    - Third-party plugin system
+    - Custom workflow automations
+    - Detailed analytics & reporting
+    - Desktop & native mobile apps
 
 _This roadmap is subject to change based on user feedback and team priorities._
 
@@ -32,7 +32,7 @@ _This roadmap is subject to change based on user feedback and team priorities._
 
 | Layer              | Technology             |
 | ------------------ | ---------------------- |
-| **Frontend**       | Nuxt, TypeScript,      |
+| **Base**           | Nuxt, TypeScript,      |
 | **UI Framework**   | Tailwind CSS, TBD      |
 | **Real-time**      | WebSockets (Socket.IO) |
 | **Database**       | SQLite                 |
