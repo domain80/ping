@@ -1,75 +1,39 @@
-# Nuxt Minimal Starter
+# 🚀 Ping: Project Management Reimagined
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Ping is a project management tool that combines the collaborative communication features of Slack with the powerful project tracking capabilities of Linear. Designed for modern teams, Ping lets you manage conversations, track tasks, and organize project items—all in one place.
 
-## Setup
+## 🛣️ Roadmap
 
-Make sure to install dependencies:
+-   **v0.1 - MVP**
+    -   User signup/sign-in (Google sign in only)
+    -   Workspace and team management
+    -   Real-time chat and threads
+    -   Basic task creation, assignment, and playback
+    -   Kanban-style board view
+-   **v0.2**
+    -   Integrations with GitHub, Google Calendar
+    -   Notification improvements (email & in-app)
+    -   Advanced task filters & search
+    -   File attachments and previews
+    -   Mobile web support
+-   **v1.0**
+    -   Third-party plugin system
+    -   Custom workflow automations
+    -   Detailed analytics & reporting
+    -   Time tracking
+    -   Desktop & native mobile apps
 
-```bash
-# npm
-npm install
+_This roadmap is subject to change based on user feedback and team priorities._
 
-# pnpm
-pnpm install
+---
 
-# yarn
-yarn install
+## 🧱 Tech Stack
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+| Layer              | Technology             |
+| ------------------ | ---------------------- |
+| **Frontend**       | Nuxt, TypeScript,      |
+| **UI Framework**   | Tailwind CSS, TBD      |
+| **Real-time**      | WebSockets (Socket.IO) |
+| **Database**       | SQLite                 |
+| **Authentication** | Better Auth            |
+| **CI/CD**          | GitHub Actions         |
