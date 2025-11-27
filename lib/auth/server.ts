@@ -2,10 +2,12 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { organization } from "better-auth/plugins";
 import { db } from "~~/lib/db"; // your drizzle instance
+import * as authSchema from "../schema/auth-schema";
 
 export const auth = betterAuth({
     database: drizzleAdapter(db, {
         provider: "sqlite", // or "mysql", "sqlite", "pg"
+        schema: authSchema,
     }),
     socialProviders: {
         github: {

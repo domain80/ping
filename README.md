@@ -1,15 +1,17 @@
 # 🚀 Ping: Project Management Reimagined
 
-Ping is a project management tool that combines the collaborative communication features of Slack with the powerful project tracking capabilities of Linear. Designed for modern teams, Ping lets you manage conversations, track tasks, and organize project items—all in one place.
+Ping is a unified project platform that blends Slack-style team communication with Linear / Jira level project tracking. It brings conversations, tasks, and project items together in one workspace, so teams can collaborate, stay aligned, and move work forward without switching tools.
+
+#️⃣reliable #️⃣streamlined #️⃣cohesive #️⃣effective
 
 ## 🛣️ Roadmap
 
 - **v0.1 - MVP**
     - User signup/sign-in (Google sign in only)
     - Workspace and team management
-    - Real-time chat and threads
     - Basic task creation, assignment, and playback
     - Kanban-style board and list view
+    - Real-time chat and threads
 - **v0.2**
     - Teams
     - Integrations with GitHub, Google Calendar
@@ -17,7 +19,7 @@ Ping is a project management tool that combines the collaborative communication 
     - Advanced task filters & search
     - File attachments and previews
     - Mobile web support
-- **v3.0**
+- **v0.3**
     - Time tracking
     - Third-party plugin system
     - Custom workflow automations
