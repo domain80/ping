@@ -25,10 +25,7 @@ export const auth = betterAuth({
             creatorRole: "owner",
             allowUserToCreateOrganization: true,
             teams: {
-                enabled: true,
-                defaultTeam: {
-                    enabled: true,
-                },
+                enabled: false,
             },
         }),
     ],
