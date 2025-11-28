@@ -2,7 +2,7 @@ import { z } from "zod";
 import { db } from "~~/lib/db";
 import { project } from "~~/lib/schema/project-schema";
 import { getValidSession } from "~~/server/utils/session";
-import { getActiveWorkspaceId } from "~~/server/utils/workspace";
+import { getVerifiedWorkspaceId } from "~~/server/utils/workspace";
 
 const createProjectSchema = z.object({
     name: z.string().min(1, "Project name is required").trim(),
@@ -11,7 +11,7 @@ const createProjectSchema = z.object({
 
 export default defineEventHandler(async (event) => {
     const session = await getValidSession(event);
-    const workspaceId = getActiveWorkspaceId(session);
+    const workspaceId = await getVerifiedWorkspaceId(event, session);
 
     const body = await readValidatedBody(event, createProjectSchema.parse);
 
