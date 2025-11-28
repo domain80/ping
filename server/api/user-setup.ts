@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
         const org = await auth.api.createOrganization({
             headers: event.headers,
             body: {
-                name: `${user.name}'s Organization`,
+                name: `${user.name.split(" ")[0]}'s Workspace`,
                 slug: `default-${nanoid(8)}`,
                 userId: user.id,
             },
