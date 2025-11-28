@@ -45,7 +45,7 @@ const projects = computed(() => projectsResponse.value?.data ?? [])
     <SidebarMenu>
       <SidebarMenuItem v-for="project in projects" :key="project.id">
         <SidebarMenuButton as-child>
-          <NuxtLink :to="`/project/${project.id}`">
+          <NuxtLink :to="`/dashboard/projects/${project.id}`">
             <FolderKanban />
             <span>{{ project.name }}</span>
           </NuxtLink>

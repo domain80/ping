@@ -1,66 +1,67 @@
 <script setup lang="ts">
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar';
-import { Button } from '~/components/ui/button';
-import { authClient } from '~/lib/auth-client';
+import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from '@/components/ui/breadcrumb'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
+import { Button } from '~/components/ui/button'
+import { authClient } from '~/lib/auth-client'
 
 definePageMeta({
     layout: false,
     title: "Profile | Ping"
 })
 
-
-// const session = await authClient.getSession();
 const session = authClient.useSession()
 
 async function handleSignout() {
-    await authClient.signOut();
+    await authClient.signOut()
     await navigateTo({ name: "login" })
 }
-
 </script>
 
 <template>
-    <NuxtLayout :key="session.data?.session.token ?? 'guest'" name="auth-layout">
+    <NuxtLayout name="default">
+        <template #breadcrumb>
+            <Breadcrumb>
+                <BreadcrumbList>
+                    <BreadcrumbItem class="hidden md:block">
+                        <BreadcrumbLink href="/">
+                            Home
+                        </BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator class="hidden md:block" />
+                    <BreadcrumbItem>
+                        <BreadcrumbPage>Profile</BreadcrumbPage>
+                    </BreadcrumbItem>
+                </BreadcrumbList>
+            </Breadcrumb>
+        </template>
 
-        <div>
-            <!-- <pre>
-                {{ session }}
-            </pre> -->
-
-            <div class="flex flex-col items-start gap-2 my-32">
-                <!-- show profile info -->
-                <Avatar v-if="session.data" class="ring ring-gray-200 shadow flex items-center justify-center size-10">
+        <div class="max-w-2xl">
+            <div class="flex flex-col items-start gap-4 mb-8">
+                <Avatar v-if="session.data" class="ring ring-border shadow size-16">
                     <AvatarImage :src="session.data?.user.image ?? ''" />
-                    <AvatarFallback>{{ session.data?.user.name.at(0) }} </AvatarFallback>
+                    <AvatarFallback class="text-xl">{{ session.data?.user.name.at(0) }}</AvatarFallback>
                 </Avatar>
                 <div>
-                    <h4 class="text-lg">{{ session.data?.user.name }} </h4>
-                    <p class="">{{ session.data?.user.email }} </p>
+                    <h1 class="text-2xl font-semibold">{{ session.data?.user.name }}</h1>
+                    <p class="text-muted-foreground">{{ session.data?.user.email }}</p>
                 </div>
-
             </div>
 
-            <div class="flex gap-8 items-center">
-                <NuxtLink :to="{ name: 'dashboard' }" class="text-muted-foreground ">
-                    Go to dashboard
+            <div class="flex gap-4 items-center">
+                <NuxtLink :to="{ name: 'dashboard' }">
+                    <Button variant="outline">Go to dashboard</Button>
                 </NuxtLink>
-
-                <Button variant="link" :onclick="handleSignout" class="">
+                <Button variant="destructive" @click="handleSignout">
                     Sign out
                 </Button>
             </div>
-
-
         </div>
-
-        <template #desc>
-            <section>
-                <p class="font-medium">Profile Info</p>
-                <p class="text-sm">View your profile information</p>
-            </section>
-        </template>
-
     </NuxtLayout>
 </template>
-
-<style lang="scss" scoped></style>div

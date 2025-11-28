@@ -24,18 +24,16 @@ const organizations = authClient.useListOrganizations()
 
 const workspaces = computed(() => [...(organizations.value?.data ?? [])])
 
-// Active workspace
 const activeWorkspace = computed(() => {
   const active = activeOrganization.value?.data
   if (active) {
     // Find matching workspace from list to get consistent type
     return workspaces.value.find(w => w.id === active.id) ?? null
-  }
-
-  if (workspaces.value[0])
+  } else if (workspaces.value[0]) {
     authClient.organization.setActive({
       organizationId: workspaces.value[0].id
     })
+  }
   return workspaces.value[0] ?? null
 })
 
