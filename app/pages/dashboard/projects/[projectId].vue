@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ProjectNav from '@/components/ProjectNav.vue';
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -12,10 +13,11 @@ definePageMeta({
     layout: false,
 })
 
-const route = useRoute()
-const projectId = computed(() => route.params.projectId as string)
+const route = useRoute();
+const projectId = computed(() => route.params.projectId as string);
 
-// TODO: Fetch project details
+// Fetch project details
+const { data: project } = useFetch(() => `/api/project/${projectId.value}`);
 </script>
 
 <template>
@@ -30,22 +32,22 @@ const projectId = computed(() => route.params.projectId as string)
                     </BreadcrumbItem>
                     <BreadcrumbSeparator class="hidden md:block" />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Project</BreadcrumbPage>
+                        <BreadcrumbPage>{{ project?.name ?? 'Project' }}</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
         </template>
 
         <div class="space-y-6">
-            <div>
-                <h1 class="text-2xl font-semibold">Project Details</h1>
-                <p class="text-muted-foreground">Project ID: {{ projectId }}</p>
-            </div>
 
-            <div class="bg-muted/50 min-h-[400px] rounded-xl p-6">
-                <!-- Project content will go here -->
-            </div>
+
+            <!-- Project Navigation -->
+            <ProjectNav :project-id="projectId" />
+
+            <main class="p-4">
+                <!-- Child Page Content -->
+                <NuxtPage />
+            </main>
         </div>
     </NuxtLayout>
 </template>
-
