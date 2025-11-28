@@ -1,68 +1,62 @@
 <script setup lang="ts">
-import {
-  FolderKanban, Plus
-} from "lucide-vue-next";
-import { authClient } from '~/lib/auth-client';
-
 import AddProjectDialog from '@/components/AddProjectDialog.vue';
 import {
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarMenu, SidebarMenuButton,
-  SidebarMenuItem,
-  useSidebar
+    SidebarGroup,
+    SidebarGroupLabel,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { FolderKanban, Plus } from "lucide-vue-next";
+import { refreshProjects, useProjects } from '~/composables/useProjects';
 
-const { isMobile } = useSidebar();
+const route = useRoute();
 
-// Watch active organization to refetch projects when workspace changes
-const activeOrganization = authClient.useActiveOrganization();
+const { projects } = useProjects();
 
-const { data: projectsResponse, refresh } = useFetch('/api/project', {
-  watch: [() => activeOrganization.value?.data?.id],
-});
-
-const projects = computed(() => projectsResponse.value?.data ?? []);
+// Check if a project is active based on current route
+const isProjectActive = (projectId: string) => {
+    return route.path.startsWith(`/dashboard/projects/${projectId}`);
+};
 
 // Dialog state
 const isAddDialogOpen = ref(false);
 
 function handleProjectCreated() {
-  refresh();
+    refreshProjects();
 }
 </script>
 
 <template>
-  <SidebarGroup class="group-data-[collapsible=icon]:hidden">
-    <SidebarGroupLabel>Projects</SidebarGroupLabel>
-    <SidebarMenu>
-      <SidebarMenuItem v-for="project in projects" :key="project.id">
-        <SidebarMenuButton as-child>
-          <NuxtLink :to="`/dashboard/projects/${project.id}`">
-            <FolderKanban />
-            <span>{{ project.name }}</span>
-          </NuxtLink>
-        </SidebarMenuButton>
+    <SidebarGroup class="group-data-[collapsible=icon]:hidden">
+        <SidebarGroupLabel>Projects</SidebarGroupLabel>
+        <SidebarMenu>
+            <SidebarMenuItem v-for="project in projects" :key="project.id">
+                <SidebarMenuButton as-child :is-active="isProjectActive(project.id)">
+                    <NuxtLink :to="`/dashboard/projects/${project.id}`">
+                        <FolderKanban />
+                        <span>{{ project.name }}</span>
+                    </NuxtLink>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
 
-      </SidebarMenuItem>
+            <!-- Empty state -->
+            <SidebarMenuItem v-if="projects.length === 0">
+                <SidebarMenuButton class="text-sidebar-foreground/70">
+                    <span class="text-sm">No projects yet</span>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
 
-      <!-- Empty state -->
-      <SidebarMenuItem v-if="projects.length === 0">
-        <SidebarMenuButton class="text-sidebar-foreground/70">
-          <span class="text-sm">No projects yet</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
+            <!-- Add project button -->
+            <SidebarMenuItem>
+                <SidebarMenuButton class="text-sidebar-foreground/70" @click="isAddDialogOpen = true">
+                    <Plus class="text-sidebar-foreground/70" />
+                    <span>Add Project</span>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
+        </SidebarMenu>
+    </SidebarGroup>
 
-      <!-- Add project button -->
-      <SidebarMenuItem>
-        <SidebarMenuButton class="text-sidebar-foreground/70" @click="isAddDialogOpen = true">
-          <Plus class="text-sidebar-foreground/70" />
-          <span>Add Project</span>
-        </SidebarMenuButton>
-      </SidebarMenuItem>
-    </SidebarMenu>
-  </SidebarGroup>
-
-  <!-- Add Project Dialog -->
-  <AddProjectDialog v-model:open="isAddDialogOpen" @created="handleProjectCreated" />
+    <!-- Add Project Dialog -->
+    <AddProjectDialog v-model:open="isAddDialogOpen" @created="handleProjectCreated" />
 </template>
