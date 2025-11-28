@@ -41,7 +41,6 @@ async function handleSignout() {
             </div>
 
             <div class="flex gap-8 items-center">
-
                 <NuxtLink :to="{ name: 'dashboard' }" class="text-muted-foreground ">
                     Go to dashboard
                 </NuxtLink>

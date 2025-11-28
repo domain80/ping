@@ -21,7 +21,8 @@ const getCallbackUrl = () => {
 const handleGithubSignIn = () => {
     authClient.signIn.social({
         provider: "github",
-        callbackURL: getCallbackUrl()
+        callbackURL: getCallbackUrl(),
+        newUserCallbackURL: "/api/user-setup"
     })
 }
 
