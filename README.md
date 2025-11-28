@@ -7,8 +7,8 @@ Ping is a unified project platform that blends Slack-style team communication wi
 ## 🛣️ Roadmap
 
 - **v0.1 - MVP**
-    - User signup/sign-in (Google and Github sign in only)
-    - Workspace and team management
+    - ✅ User signup/sign-in (Google and Github sign in only)
+    - Workspace and project management
     - Kanban-style board and list view
     - Basic task creation, assignment and
     - Real-time chat and threads

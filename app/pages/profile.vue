@@ -29,8 +29,7 @@ async function handleSignout() {
 
             <div class="flex flex-col items-start gap-2 my-32">
                 <!-- show profile info -->
-                <Avatar v-if="session.data?.user"
-                    class="ring ring-gray-200 shadow flex items-center justify-center size-10">
+                <Avatar v-if="session.data" class="ring ring-gray-200 shadow flex items-center justify-center size-10">
                     <AvatarImage :src="session.data?.user.image ?? ''" />
                     <AvatarFallback>{{ session.data?.user.name.at(0) }} </AvatarFallback>
                 </Avatar>
