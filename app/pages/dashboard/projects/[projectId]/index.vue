@@ -9,6 +9,12 @@ const projectId = computed(() => route.params.projectId as string);
 // Fetch project details
 const { data: project, refresh } = useFetch(() => `/api/project/${projectId.value}`);
 
+// Set breadcrumbs with project name
+useSetBreadcrumbs(computed(() => [
+    { label: 'Dashboard', to: '/dashboard' },
+    { label: project.value?.name ?? 'Project' },
+]));
+
 // Refs for contenteditable elements
 const nameRef = ref<HTMLElement | null>(null);
 const descriptionRef = ref<HTMLElement | null>(null);
@@ -117,18 +123,17 @@ function handleDescriptionKeydown(e: KeyboardEvent) {
         <!-- Project Header -->
         <div class="space-y-2">
             <!-- Project Icon -->
-            <div class="size-8 rounded-sm border bg-muted/50 flex items-center justify-center">
+            <div class="size-8 mb-4  rounded-sm border bg-muted/50 flex items-center justify-center">
                 <Box class="size-4 text-muted-foreground" />
             </div>
-
             <!-- Project Name (Editable) -->
-            <h1 ref="nameRef" contenteditable="true"
-                class="text-xl font-bold outline-none rounded px-1 -mx-1 focus:bg-muted/50 transition-colors empty:before:content-['Untitled_Project'] empty:before:text-muted-foreground"
+            <h1 ref="nameRef" contenteditable="true" spellcheck="false"
+                class="text-xl font-bold outline-none rounded px-1 -mx-1  transition-colors empty:before:content-['Untitled_Project'] empty:before:text-muted-foreground"
                 @focus="handleNameFocus" @blur="handleNameBlur" @keydown="handleNameKeydown">{{ project?.name }}</h1>
 
             <!-- Description (Editable) -->
-            <p ref="descriptionRef" contenteditable="true"
-                class="text-sm text-muted-foreground outline-none rounded px-2 -mx-2 focus:bg-muted/50 transition-colors whitespace-pre-wrap empty:before:content-['Add_description...'] empty:before:text-muted-foreground/70"
+            <p ref="descriptionRef" contenteditable="true" spellcheck="false"
+                class="text-sm text-muted-foreground outline-none rounded px-2 -mx-2  transition-colors whitespace-pre-wrap empty:before:content-['Add_description...'] empty:before:text-muted-foreground/70"
                 @focus="handleDescriptionFocus" @blur="handleDescriptionBlur" @keydown="handleDescriptionKeydown">{{
                     project?.description }}</p>
 

@@ -22,6 +22,12 @@ const projectId = computed(() => route.params.projectId as string);
 // Fetch project details for the name
 const { data: project } = useFetch(() => `/api/project/${projectId.value}`);
 
+useSetBreadcrumbs(computed(() => [
+    { label: 'Dashboard', to: '/dashboard' },
+    { label: project.value?.name ?? 'Project', to: `/dashboard/projects/${projectId.value}` },
+    { label: 'Settings' },
+]));
+
 const isDeleting = ref(false);
 const confirmationInput = ref('');
 const isDialogOpen = ref(false);
