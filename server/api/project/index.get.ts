@@ -1,21 +1,21 @@
-import { eq } from "drizzle-orm";
-import { db } from "~~/lib/db";
-import { project } from "~~/lib/schema/project-schema";
-import { countRows, createPaginatedResponse, getPaginationParams } from "~~/lib/utils/pagination";
-import { getValidSession } from "~~/server/utils/session";
-import { getVerifiedWorkspaceId } from "~~/server/utils/workspace";
+import { eq } from 'drizzle-orm'
+import { db } from '~~/lib/db'
+import { project } from '~~/lib/schema/project-schema'
+import { countRows, createPaginatedResponse, getPaginationParams } from '~~/lib/utils/pagination'
+import { getValidSession } from '~~/server/utils/session'
+import { getVerifiedWorkspaceId } from '~~/server/utils/workspace'
 
 export default defineEventHandler(async (event) => {
-    const session = await getValidSession(event);
-    const workspaceId = await getVerifiedWorkspaceId(event, session);
+  const session = await getValidSession(event)
+  const workspaceId = await getVerifiedWorkspaceId(event, session)
 
-    const { page, limit, offset } = getPaginationParams(event);
-    const whereClause = eq(project.organizationId, workspaceId);
+  const { page, limit, offset } = getPaginationParams(event)
+  const whereClause = eq(project.organizationId, workspaceId)
 
-    const [projects, total] = await Promise.all([
-        db.select().from(project).where(whereClause).limit(limit).offset(offset),
-        countRows(project, whereClause),
-    ]);
+  const [projects, total] = await Promise.all([
+    db.select().from(project).where(whereClause).limit(limit).offset(offset),
+    countRows(project, whereClause),
+  ])
 
-    return createPaginatedResponse(projects, total, { page, limit });
-});
+  return createPaginatedResponse(projects, total, { page, limit })
+})

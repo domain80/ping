@@ -1,15 +1,15 @@
 export interface Breadcrumb {
-    label: string;
-    to?: string;
+  label: string
+  to?: string
 }
 
-const BREADCRUMBS_KEY = "app-breadcrumbs";
+const BREADCRUMBS_KEY = 'app-breadcrumbs'
 
 /**
  * Get the current breadcrumbs (for use in layout)
  */
 export function useBreadcrumbs() {
-    return useState<Breadcrumb[]>(BREADCRUMBS_KEY, () => []);
+  return useState<Breadcrumb[]>(BREADCRUMBS_KEY, () => [])
 }
 
 /**
@@ -17,14 +17,14 @@ export function useBreadcrumbs() {
  * Call this in page components to define their breadcrumb trail.
  */
 export function useSetBreadcrumbs(breadcrumbs: MaybeRefOrGetter<Breadcrumb[]>) {
-    const state = useState<Breadcrumb[]>(BREADCRUMBS_KEY, () => []);
+  const state = useState<Breadcrumb[]>(BREADCRUMBS_KEY, () => [])
 
-    watchEffect(() => {
-        state.value = toValue(breadcrumbs);
-    });
+  watchEffect(() => {
+    state.value = toValue(breadcrumbs)
+  })
 
-    // // Clear on unmount to prevent stale breadcrumbs
-    // onUnmounted(() => {
-    //     state.value = [];
-    // });
+  // // Clear on unmount to prevent stale breadcrumbs
+  // onUnmounted(() => {
+  //     state.value = [];
+  // });
 }

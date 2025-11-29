@@ -8,21 +8,12 @@
     computed(() => [
       { label: 'Dashboard', to: '/dashboard' },
       { label: project.value?.name ?? 'Project', to: `/dashboard/projects/${projectId.value}` },
-      { label: 'Docs' },
+      { label: 'Backlog' },
     ])
   )
+  // todo: use globally set "current project so that the breadcrumbs dont rerender all the time"
 </script>
 
 <template>
-  <div class="space-y-6">
-    <div class="flex items-center justify-between">
-      <h2 class="text-lg font-semibold">Documentation</h2>
-    </div>
-
-    <div class="bg-muted/50 min-h-[400px] rounded-lg p-6">
-      <p class="text-muted-foreground">
-        No documentation yet. Start by creating your first document.
-      </p>
-    </div>
-  </div>
+  <div class="flex gap-2 h-full overflow-x-auto pb-4">Backlog</div>
 </template>

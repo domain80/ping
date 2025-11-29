@@ -7,24 +7,24 @@ Ping is a unified project platform that blends Slack-style team communication wi
 ## 🛣️ Roadmap
 
 - **v0.1 - MVP**
-    - ✅ User signup/sign-in (Google and Github sign in only)
-    - Workspace and project management
-    - Kanban-style board and list view
-    - Basic task creation, assignment and
-    - Real-time chat and threads
+  - ✅ User signup/sign-in (Google and Github sign in only)
+  - Workspace and project management
+  - Kanban-style board and list view
+  - Basic task creation, assignment and
+  - Real-time chat and threads
 - **v0.2**
-    - Teams
-    - Integrations with GitHub, Google Calendar
-    - Notification improvements (email & in-app)
-    - Advanced task filters & search
-    - File attachments and previews
-    - Mobile web support
+  - Teams
+  - Integrations with GitHub, Google Calendar
+  - Notification improvements (email & in-app)
+  - Advanced task filters & search
+  - File attachments and previews
+  - Mobile web support
 - **v0.3**
-    - Time tracking
-    - Third-party plugin system
-    - Custom workflow automations
-    - Detailed analytics & reporting
-    - Desktop & native mobile apps
+  - Time tracking
+  - Third-party plugin system
+  - Custom workflow automations
+  - Detailed analytics & reporting
+  - Desktop & native mobile apps
 
 _This roadmap is subject to change based on user feedback and team priorities._
 
