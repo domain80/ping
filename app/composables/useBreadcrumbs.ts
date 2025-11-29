@@ -23,8 +23,8 @@ export function useSetBreadcrumbs(breadcrumbs: MaybeRefOrGetter<Breadcrumb[]>) {
         state.value = toValue(breadcrumbs);
     });
 
-    // Clear on unmount to prevent stale breadcrumbs
-    onUnmounted(() => {
-        state.value = [];
-    });
+    // // Clear on unmount to prevent stale breadcrumbs
+    // onUnmounted(() => {
+    //     state.value = [];
+    // });
 }

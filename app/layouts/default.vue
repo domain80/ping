@@ -8,8 +8,50 @@ import {
 } from '@/components/ui/sidebar';
 import ThemeSwitcher from '~/components/ThemeSwitcher.vue';
 import { BreadcrumbSeparator } from '~/components/ui/breadcrumb';
+import type { Breadcrumb } from '~/composables/useBreadcrumbs';
 
-const breadcrumbs = useBreadcrumbs();
+const rawBreadcrumbs = useBreadcrumbs();
+
+// Stable array - preserves object references for unchanged items at same position
+const stableBreadcrumbs = shallowRef<Breadcrumb[]>([]);
+
+watch(rawBreadcrumbs, (newCrumbs) => {
+    const current = stableBreadcrumbs.value;
+    let changed = false;
+
+    // Check if anything actually changed
+    if (current.length !== newCrumbs.length) {
+        changed = true;
+    } else {
+        for (let i = 0; i < newCrumbs.length; i++) {
+            const c = current[i];
+            const n = newCrumbs[i];
+            if (!c || !n || c.label !== n.label || c.to !== n.to) {
+                changed = true;
+                break;
+            }
+        }
+    }
+
+    if (!changed) return;
+
+    // Build new array, reusing objects where possible
+    const result: Breadcrumb[] = [];
+    for (let i = 0; i < newCrumbs.length; i++) {
+        const existing = current[i];
+        const incoming = newCrumbs[i];
+        if (!incoming) continue;
+
+        // Same item at same index? Reuse the object
+        if (existing && existing.label === incoming.label && existing.to === incoming.to) {
+            result.push(existing);
+        } else {
+            result.push({ label: incoming.label, to: incoming.to });
+        }
+    }
+
+    stableBreadcrumbs.value = result;
+}, { immediate: true, deep: true });
 </script>
 
 <template>
@@ -21,11 +63,12 @@ const breadcrumbs = useBreadcrumbs();
                 <div class="flex items-center gap-2 px-4 w-full">
                     <SidebarTrigger />
                     <Separator orientation="vertical" class="mr-2 data-[orientation=vertical]:h-4" />
-                    <Breadcrumb v-if="breadcrumbs.length">
+                    <Breadcrumb v-if="stableBreadcrumbs.length">
                         <BreadcrumbList class="flex items-center text-muted-foreground text-sm">
-                            <template v-for="(crumb, idx) in breadcrumbs" :key="crumb.to ?? idx">
-                                <BreadcrumbItem :class="idx < breadcrumbs.length - 1 ? 'hidden md:inline-flex' : ''">
-                                    <template v-if="idx === breadcrumbs.length - 1">
+                            <template v-for="(crumb, idx) in stableBreadcrumbs" :key="crumb.to ?? crumb.label">
+                                <BreadcrumbItem
+                                    :class="idx < stableBreadcrumbs.length - 1 ? 'hidden md:inline-flex' : ''">
+                                    <template v-if="idx === stableBreadcrumbs.length - 1">
                                         <BreadcrumbPage>{{ crumb.label }}</BreadcrumbPage>
                                     </template>
                                     <template v-else>
@@ -33,10 +76,7 @@ const breadcrumbs = useBreadcrumbs();
                                         <span v-else>{{ crumb.label }}</span>
                                     </template>
                                 </BreadcrumbItem>
-                                <!-- <Separator v-if="idx < breadcrumbs.length - 1" orientation="vertical"
-                                    class="mx-2 data-[orientation=vertical]:h-4 hidden md:inline-flex" /> -->
-
-                                <BreadcrumbSeparator v-if="idx < breadcrumbs.length - 1"
+                                <BreadcrumbSeparator v-if="idx < stableBreadcrumbs.length - 1"
                                     class="hidden mx-2 md:inline-flex" />
                             </template>
                         </BreadcrumbList>
