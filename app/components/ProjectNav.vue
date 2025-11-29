@@ -1,5 +1,12 @@
 <script setup lang="ts">
-  import { CircleDashed, FileText, KanbanSquare, LayoutGrid, Settings } from 'lucide-vue-next'
+  import {
+    CircleDashed,
+    FileText,
+    KanbanSquare,
+    LayoutGrid,
+    MessageCircle,
+    Settings,
+  } from 'lucide-vue-next'
 
   const props = defineProps<{
     projectId: string
@@ -13,6 +20,11 @@
       href: `/dashboard/projects/${props.projectId}`,
       icon: LayoutGrid,
       exact: true,
+    },
+    {
+      name: 'Chat',
+      href: `/dashboard/projects/${props.projectId}/chat`,
+      icon: MessageCircle,
     },
     {
       name: 'Backlog',

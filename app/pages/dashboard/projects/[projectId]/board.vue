@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import ProjectBoardColumn from '~/components/ProjectBoardColumn.vue'
+
   const route = useRoute()
   const projectId = computed(() => route.params.projectId as string)
 
@@ -14,37 +16,40 @@
 </script>
 
 <template>
-  <div class="flex gap-2 h-full overflow-x-auto pb-4">
+  <div class="flex gap-3 h-full overflow-x-auto px-4 py-4">
+    <!-- Backlog Column -->
+    <ProjectBoardColumn
+      title="Backlog"
+      icon="tabler:archive"
+      icon-class="text-muted-foreground"
+    />
+
     <!-- To Do Column -->
-    <div class="shrink-0 w-72 bg-muted/50 rounded-lg p-4 flex flex-col">
-      <h3 class="font-semibold mb-4">To Do</h3>
-      <div class="flex-1 space-y-2 overflow-y-auto">
-        <p class="text-sm text-muted-foreground">No tasks yet</p>
-      </div>
-    </div>
+    <ProjectBoardColumn
+      title="To Do"
+      icon="tabler:list-check"
+      icon-class="text-muted-foreground"
+    />
 
     <!-- In Progress Column -->
-    <div class="shrink-0 w-72 bg-muted/50 rounded-lg p-4 flex flex-col">
-      <h3 class="font-semibold mb-4">In Progress</h3>
-      <div class="flex-1 space-y-2 overflow-y-auto">
-        <p class="text-sm text-muted-foreground">No tasks yet</p>
-      </div>
-    </div>
+    <ProjectBoardColumn
+      title="In Progress"
+      icon="tabler:progress"
+      icon-class="text-blue-500"
+    />
 
     <!-- Review Column -->
-    <div class="shrink-0 w-72 bg-muted/50 rounded-lg p-4 flex flex-col">
-      <h3 class="font-semibold mb-4">Review</h3>
-      <div class="flex-1 space-y-2 overflow-y-auto">
-        <p class="text-sm text-muted-foreground">No tasks yet</p>
-      </div>
-    </div>
+    <ProjectBoardColumn
+      title="Review"
+      icon="tabler:eye-search"
+      icon-class="text-amber-500"
+    />
 
     <!-- Done Column -->
-    <div class="shrink-0 w-72 bg-muted/50 rounded-lg p-4 flex flex-col">
-      <h3 class="font-semibold mb-4">Done</h3>
-      <div class="flex-1 space-y-2 overflow-y-auto">
-        <p class="text-sm text-muted-foreground">No tasks yet</p>
-      </div>
-    </div>
+    <ProjectBoardColumn
+      title="Done"
+      icon="tabler:circle-check"
+      icon-class="text-green-500"
+    />
   </div>
 </template>
