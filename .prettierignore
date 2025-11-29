@@ -1,0 +1,17 @@
+# Build outputs
+.nuxt
+.output
+dist
+
+# Dependencies
+node_modules
+
+# Database
+*.db
+
+# Lock files
+pnpm-lock.yaml
+
+# Generated
+.nitro
+
