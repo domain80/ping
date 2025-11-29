@@ -6,7 +6,7 @@ const projectId = computed(() => route.params.projectId as string);
 </script>
 
 <template>
-    <div class="space-y-6">
+    <div class="">
         <ProjectNav :project-id="projectId" />
 
         <main class="p-4">
