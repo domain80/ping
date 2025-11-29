@@ -9,7 +9,7 @@
   <div class="flex flex-col h-full">
     <ProjectNav :project-id="projectId" />
 
-    <main class="flex-1 p-4 min-h-0">
+    <main class="flex-1 min-h-0">
       <NuxtPage />
     </main>
   </div>

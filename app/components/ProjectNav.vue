@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import {
-    CircleDashed,
+    Archive,
     FileText,
     KanbanSquare,
     LayoutGrid,
@@ -22,19 +22,19 @@
       exact: true,
     },
     {
-      name: 'Chat',
-      href: `/dashboard/projects/${props.projectId}/chat`,
-      icon: MessageCircle,
-    },
-    {
       name: 'Backlog',
       href: `/dashboard/projects/${props.projectId}/backlog`,
-      icon: CircleDashed,
+      icon: Archive,
     },
     {
       name: 'Board',
       href: `/dashboard/projects/${props.projectId}/board`,
       icon: KanbanSquare,
+    },
+    {
+      name: 'Chats',
+      href: `/dashboard/projects/${props.projectId}/chat`,
+      icon: MessageCircle,
     },
     {
       name: 'Docs',
@@ -57,7 +57,7 @@
 </script>
 
 <template>
-  <nav class="border-b overflow-auto">
+  <nav class="border-b overflow-auto [scrollbar-width:none] [-ms-overflow-style:none]">
     <div class="flex gap-6 mx-4">
       <NuxtLink
         v-for="item in navItems"
@@ -79,3 +79,9 @@
     </div>
   </nav>
 </template>
+
+<style scoped>
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+</style>

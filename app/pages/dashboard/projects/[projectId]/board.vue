@@ -16,14 +16,10 @@
 </script>
 
 <template>
-  <div class="flex gap-3 h-full overflow-x-auto px-4 py-4">
-    <!-- Backlog Column -->
-    <ProjectBoardColumn
-      title="Backlog"
-      icon="tabler:archive"
-      icon-class="text-muted-foreground"
-    />
-
+  <div
+    class="flex gap-3 h-full overflow-x-auto px-4 py-4"
+    style="scrollbar-width: none; -ms-overflow-style: none"
+  >
     <!-- To Do Column -->
     <ProjectBoardColumn
       title="To Do"

@@ -3,8 +3,13 @@
   import { Separator } from '@/components/ui/separator'
   import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
   import ThemeSwitcher from '~/components/ThemeSwitcher.vue'
-  import { BreadcrumbSeparator } from '~/components/ui/breadcrumb'
-  import type { Breadcrumb } from '~/composables/useBreadcrumbs'
+  import {
+    Breadcrumb,
+    BreadcrumbItem,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+  } from '~/components/ui/breadcrumb'
 
   const rawBreadcrumbs = useBreadcrumbs()
 
@@ -91,7 +96,7 @@
                 </BreadcrumbItem>
                 <BreadcrumbSeparator
                   v-if="idx < stableBreadcrumbs.length - 1"
-                  class="hidden mx-2 md:inline-flex"
+                  class="hidden md:inline-flex"
                 />
               </template>
             </BreadcrumbList>

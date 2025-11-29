@@ -47,10 +47,10 @@
           <Button
             variant="ghost"
             size="icon-sm"
-            class="size-7 text-muted-foreground"
+            class="size-7 -mr-2 text-muted-foreground"
           >
             <Icon
-              name="lucide:plus"
+              name="tabler:plus"
               class="size-4"
             />
           </Button>
