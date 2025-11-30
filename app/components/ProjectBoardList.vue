@@ -1,10 +1,6 @@
 <script setup lang="ts">
   import { Icon } from '#components'
-  import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-  } from '@/components/ui/collapsible'
+  import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
   import { Badge } from '~/components/ui/badge'
   import { Button } from '~/components/ui/button'
   import type { ListGroupBy } from '~/stores/boardView'
@@ -16,7 +12,12 @@
   // Status grouping configuration
   const statusGroups = [
     { key: 'todo', label: 'To Do', icon: 'tabler:list-check', iconClass: 'text-muted-foreground' },
-    { key: 'in_progress', label: 'In Progress', icon: 'tabler:progress', iconClass: 'text-blue-500' },
+    {
+      key: 'in_progress',
+      label: 'In Progress',
+      icon: 'tabler:progress',
+      iconClass: 'text-blue-500',
+    },
     { key: 'review', label: 'Review', icon: 'tabler:eye-search', iconClass: 'text-amber-500' },
     { key: 'done', label: 'Done', icon: 'tabler:circle-check', iconClass: 'text-green-500' },
   ]
@@ -32,7 +33,12 @@
 
   // Assignee grouping configuration (placeholder - will be dynamic based on team members)
   const assigneeGroups = [
-    { key: 'unassigned', label: 'Unassigned', icon: 'tabler:user-off', iconClass: 'text-muted-foreground' },
+    {
+      key: 'unassigned',
+      label: 'Unassigned',
+      icon: 'tabler:user-off',
+      iconClass: 'text-muted-foreground',
+    },
     // Additional assignees would be added dynamically
   ]
 
@@ -54,8 +60,7 @@
   function toggleGroup(key: string) {
     if (collapsedGroups.value.has(key)) {
       collapsedGroups.value.delete(key)
-    }
-    else {
+    } else {
       collapsedGroups.value.add(key)
     }
   }
@@ -75,19 +80,19 @@
 </script>
 
 <template>
-  <div class="space-y-2 px-4 py-4">
+  <div class="space-y-1 py-4">
     <Collapsible
       v-for="group in currentGroups"
       :key="group.key"
       :open="!isCollapsed(group.key)"
-      class="rounded-lg border bg-card"
+      class="rounded"
     >
       <CollapsibleTrigger
         as-child
         class="w-full"
       >
         <button
-          class="flex items-center gap-2 w-full px-3 py-2.5 hover:bg-muted/50 transition-colors rounded-t-lg"
+          class="flex items-center gap-2 w-full px-3 py-1 transition-colors"
           @click="toggleGroup(group.key)"
         >
           <!-- Collapse indicator -->
@@ -144,11 +149,10 @@
             />
           </template>
           <template v-else>
-            <p class="text-sm text-muted-foreground py-2 pl-6">No tasks</p>
+            <p class="text-sm text-muted-foreground pl-6">No tasks</p>
           </template>
         </div>
       </CollapsibleContent>
     </Collapsible>
   </div>
 </template>
-

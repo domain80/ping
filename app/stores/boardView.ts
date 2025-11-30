@@ -1,11 +1,16 @@
 export type BoardViewMode = 'board' | 'list'
 export type ListGroupBy = 'status' | 'assignee' | 'priority'
-export type BoardGroupBy = 'status' | 'assignee' | 'priority' | 'status+assignee' | 'status+priority'
+export type BoardGroupBy =
+  | 'status'
+  | 'assignee'
+  | 'priority'
+  | 'status+assignee'
+  | 'status+priority'
 
 export const useBoardViewStore = defineStore(
   'boardView',
   () => {
-    const viewMode = ref<BoardViewMode>('board')
+    const viewMode = ref<BoardViewMode>('list')
     const listGroupBy = ref<ListGroupBy>('status')
     const boardGroupBy = ref<BoardGroupBy>('status')
 
