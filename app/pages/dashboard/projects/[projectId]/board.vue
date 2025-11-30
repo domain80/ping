@@ -1,18 +1,8 @@
 <script setup lang="ts">
   import ProjectBoardColumn from '~/components/ProjectBoardColumn.vue'
 
-  const route = useRoute()
-  const projectId = computed(() => route.params.projectId as string)
-
-  const { data: project } = useFetch(() => `/api/project/${projectId.value}`)
-
-  useSetBreadcrumbs(
-    computed(() => [
-      { label: 'Dashboard', to: '/dashboard' },
-      { label: project.value?.name ?? 'Project', to: `/dashboard/projects/${projectId.value}` },
-      { label: 'Board' },
-    ])
-  )
+  // Extend breadcrumbs from parent
+  useExtendBreadcrumbs([{ label: 'Board' }])
 </script>
 
 <template>

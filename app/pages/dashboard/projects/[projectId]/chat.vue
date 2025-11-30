@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+  // Extend breadcrumbs from parent
+  useExtendBreadcrumbs([{ label: 'Chat' }])
+</script>
 
 <template>
   <div class="flex flex-col items-center justify-center h-full py-20 text-center gap-4">

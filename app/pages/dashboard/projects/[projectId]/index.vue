@@ -6,16 +6,8 @@
   const route = useRoute()
   const projectId = computed(() => route.params.projectId as string)
 
-  // Fetch project details
+  // Fetch project details (uses cached data from parent)
   const { data: project, refresh } = useFetch(() => `/api/project/${projectId.value}`)
-
-  // Set breadcrumbs with project name
-  useSetBreadcrumbs(
-    computed(() => [
-      { label: 'Dashboard', to: '/dashboard' },
-      { label: project.value?.name ?? 'Project' },
-    ])
-  )
 
   // Refs for contenteditable elements
   const nameRef = ref<HTMLElement | null>(null)

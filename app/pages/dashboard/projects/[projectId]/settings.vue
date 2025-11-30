@@ -19,16 +19,11 @@
   const router = useRouter()
   const projectId = computed(() => route.params.projectId as string)
 
-  // Fetch project details for the name
+  // Fetch project details (uses cached data from parent)
   const { data: project } = useFetch(() => `/api/project/${projectId.value}`)
 
-  useSetBreadcrumbs(
-    computed(() => [
-      { label: 'Dashboard', to: '/dashboard' },
-      { label: project.value?.name ?? 'Project', to: `/dashboard/projects/${projectId.value}` },
-      { label: 'Settings' },
-    ])
-  )
+  // Extend breadcrumbs from parent
+  useExtendBreadcrumbs([{ label: 'Settings' }])
 
   const isDeleting = ref(false)
   const confirmationInput = ref('')
