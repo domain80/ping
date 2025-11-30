@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { Icon } from '#components'
-  import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
-  import { Badge } from '~/components/ui/badge'
-  import ProjectTaskGroup from '~/components/ProjectTaskGroup.vue'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import ProjectTaskGroup from '~/components/ProjectTaskGroup.vue'
+import { Badge } from '~/components/ui/badge'
 
   // Get view preferences from store
   const boardView = useBoardViewStore()
