@@ -24,6 +24,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-icons',
     '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
   ],
 
   colorMode: {
@@ -43,5 +44,9 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui',
+  },
+
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
 })
