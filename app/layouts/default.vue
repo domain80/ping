@@ -12,6 +12,11 @@
   } from '~/components/ui/breadcrumb'
 
   const rawBreadcrumbs = useBreadcrumbs()
+  const globalActions = useHeaderActions()
+
+  const sortedGlobalActions = computed(() =>
+    [...globalActions.value].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+  )
 
   // Stable array - preserves object references for unchanged items at same position
   const stableBreadcrumbs = shallowRef<Breadcrumb[]>([])
@@ -63,6 +68,7 @@
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset class="flex flex-col h-screen overflow-hidden">
+      <!-- Top app header -->
       <header
         class="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 border-b"
       >
@@ -72,6 +78,8 @@
             orientation="vertical"
             class="mr-2 data-[orientation=vertical]:h-4"
           />
+
+          <!-- Breadcrumbs -->
           <Breadcrumb v-if="stableBreadcrumbs.length">
             <BreadcrumbList class="flex items-center text-muted-foreground text-sm">
               <template
@@ -101,7 +109,22 @@
               </template>
             </BreadcrumbList>
           </Breadcrumb>
-          <div class="ml-auto p-0">
+          <!-- Header actions -->
+          <div class="ml-auto flex items-center gap-2">
+            <!-- Global actions from composable -->
+            <component
+              :is="action.component"
+              v-for="action in sortedGlobalActions"
+              :key="action.id"
+              v-bind="action.props"
+            />
+
+            <!-- Page-specific actions (teleport target) -->
+            <div
+              id="page-header-actions"
+              class="contents"
+            />
+
             <ThemeSwitcher />
           </div>
         </div>
