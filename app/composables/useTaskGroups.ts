@@ -5,6 +5,12 @@ export interface TaskGroup {
   iconClass: string
 }
 
+export interface ParsedGroupBy {
+  primary: 'status' | 'assignee' | 'priority'
+  secondary: 'status' | 'assignee' | 'priority' | null
+  isCompound: boolean
+}
+
 /**
  * Composable for task group configurations.
  * Provides status, priority, and assignee groupings for board/list views.
@@ -16,7 +22,12 @@ export function useTaskGroups() {
   // Status-based groups (static - defined by the system)
   const statusGroups: TaskGroup[] = [
     { key: 'todo', label: 'To Do', icon: 'tabler:list-check', iconClass: 'text-muted-foreground' },
-    { key: 'in_progress', label: 'In Progress', icon: 'tabler:progress', iconClass: 'text-blue-500' },
+    {
+      key: 'in_progress',
+      label: 'In Progress',
+      icon: 'tabler:progress',
+      iconClass: 'text-blue-500',
+    },
     { key: 'review', label: 'Review', icon: 'tabler:eye-search', iconClass: 'text-amber-500' },
     { key: 'done', label: 'Done', icon: 'tabler:circle-check', iconClass: 'text-green-500' },
   ]
@@ -33,7 +44,12 @@ export function useTaskGroups() {
   // Assignee-based groups (will be fetched from API - team members)
   // For now, just show unassigned. In future: fetch project members and map to groups.
   const assigneeGroups: TaskGroup[] = [
-    { key: 'unassigned', label: 'Unassigned', icon: 'tabler:user-off', iconClass: 'text-muted-foreground' },
+    {
+      key: 'unassigned',
+      label: 'Unassigned',
+      icon: 'tabler:user-off',
+      iconClass: 'text-muted-foreground',
+    },
     // TODO: Dynamically populate from project team members
   ]
 
@@ -51,11 +67,29 @@ export function useTaskGroups() {
     }
   }
 
+  /**
+   * Parse compound groupBy string (e.g., 'status+assignee') into primary and secondary
+   */
+  function parseGroupBy(groupBy: string): ParsedGroupBy {
+    if (groupBy.includes('+')) {
+      const [primary, secondary] = groupBy.split('+') as [
+        'status' | 'assignee' | 'priority',
+        'status' | 'assignee' | 'priority',
+      ]
+      return { primary, secondary, isCompound: true }
+    }
+    return {
+      primary: groupBy as 'status' | 'assignee' | 'priority',
+      secondary: null,
+      isCompound: false,
+    }
+  }
+
   return {
     statusGroups,
     priorityGroups,
     assigneeGroups,
     getGroups,
+    parseGroupBy,
   }
 }
-
